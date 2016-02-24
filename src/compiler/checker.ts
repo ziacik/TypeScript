@@ -2583,10 +2583,7 @@ namespace ts {
                     return anyType;
                 }
                 if (declaration.initializer) {
-                    const type = getContextualType(declaration.initializer);
-                    if (type) {
-                        return type;
-                    }
+                    getContextualType(declaration.initializer);
                 }
 
                 // Use type of the specified property, or otherwise, for a numeric name, the type of the numeric index signature,
@@ -7770,6 +7767,8 @@ namespace ts {
         //   the contextual type of an initializer expression is the contextual type of the parameter. 
         // Otherwise, in a variable or parameter declaration with a binding pattern name,
         //   the contextual type of an initializer expression is the type implied by the binding pattern.
+        // Otherwise, in a binding pattern inside a variable or parameter declaration,
+        //   the contextual type of an initializer expression is the type annotation of the containing declaration, if present.
         function getContextualTypeForInitializerExpression(node: Expression): Type {
             const declaration = <VariableLikeDeclaration>node.parent;
             if (node === declaration.initializer) {
@@ -7785,11 +7784,14 @@ namespace ts {
                 if (isBindingPattern(declaration.name)) {
                     return getTypeFromBindingPattern(<BindingPattern>declaration.name, /*includePatternInType*/ true);
                 }
-                if (isBindingPattern(declaration.parent) && declaration.parent.parent.kind === SyntaxKind.Parameter) {
-                    const param = <ParameterDeclaration>declaration.parent.parent;
-                    const name = declaration.name;
-                    if (isDeclarationName(name) && param.type) {
-                        return getTypeOfPropertyOfType(getTypeFromTypeNode(param.type), name.text);
+                if (isBindingPattern(declaration.parent)) {
+                    const parentDeclaration = declaration.parent.parent;
+                    const name = declaration.propertyName || declaration.name;
+                    if (isVariableLike(parentDeclaration) &&
+                        parentDeclaration.type &&
+                        (name.kind === SyntaxKind.Identifier || name.kind == SyntaxKind.StringLiteral)) {
+                        const text = (<Identifier | LiteralExpression>name).text;
+                        return getTypeOfPropertyOfType(getTypeFromTypeNode(parentDeclaration.type), text);
                     }
                 }
             }

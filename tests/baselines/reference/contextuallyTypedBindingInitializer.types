@@ -63,3 +63,23 @@ function h({ prop = "foo" }: StringUnion) {}
 >"foo" : "foo"
 >StringUnion : StringUnion
 
+interface StringIdentity {
+>StringIdentity : StringIdentity
+
+    stringIdentity(s: string): string;
+>stringIdentity : (s: string) => string
+>s : string
+}
+let { stringIdentity: id = arg => arg }: StringIdentity = { stringIdentity: x => x};
+>stringIdentity : any
+>id : (s: string) => string
+>arg => arg : (arg: string) => string
+>arg : string
+>arg : string
+>StringIdentity : StringIdentity
+>{ stringIdentity: x => x} : { stringIdentity: (x: string) => string; }
+>stringIdentity : (x: string) => string
+>x => x : (x: string) => string
+>x : string
+>x : string
+

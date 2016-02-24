@@ -54,3 +54,20 @@ function h({ prop = "foo" }: StringUnion) {}
 >prop : Symbol(prop, Decl(contextuallyTypedBindingInitializer.ts, 18, 12))
 >StringUnion : Symbol(StringUnion, Decl(contextuallyTypedBindingInitializer.ts, 13, 49))
 
+interface StringIdentity {
+>StringIdentity : Symbol(StringIdentity, Decl(contextuallyTypedBindingInitializer.ts, 18, 44))
+
+    stringIdentity(s: string): string;
+>stringIdentity : Symbol(stringIdentity, Decl(contextuallyTypedBindingInitializer.ts, 20, 26))
+>s : Symbol(s, Decl(contextuallyTypedBindingInitializer.ts, 21, 19))
+}
+let { stringIdentity: id = arg => arg }: StringIdentity = { stringIdentity: x => x};
+>stringIdentity : Symbol(StringIdentity.stringIdentity, Decl(contextuallyTypedBindingInitializer.ts, 20, 26))
+>id : Symbol(id, Decl(contextuallyTypedBindingInitializer.ts, 23, 5))
+>arg : Symbol(arg, Decl(contextuallyTypedBindingInitializer.ts, 23, 26))
+>arg : Symbol(arg, Decl(contextuallyTypedBindingInitializer.ts, 23, 26))
+>StringIdentity : Symbol(StringIdentity, Decl(contextuallyTypedBindingInitializer.ts, 18, 44))
+>stringIdentity : Symbol(stringIdentity, Decl(contextuallyTypedBindingInitializer.ts, 23, 59))
+>x : Symbol(x, Decl(contextuallyTypedBindingInitializer.ts, 23, 75))
+>x : Symbol(x, Decl(contextuallyTypedBindingInitializer.ts, 23, 75))
+

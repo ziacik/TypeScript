@@ -23,7 +23,7 @@ var { b1, } = { b1:1, };
 
 var { b2: { b21 } = { b21: "string" }  } = { b2: { b21: "world" } };
 >b2 : any
->b21 : any
+>b21 : string
 >{ b21: "string" } : { b21: string; }
 >b21 : string
 >"string" : string

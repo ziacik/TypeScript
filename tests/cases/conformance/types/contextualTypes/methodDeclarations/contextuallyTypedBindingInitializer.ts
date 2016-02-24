@@ -18,3 +18,8 @@ interface StringUnion {
     prop: "foo" | "bar";
 }
 function h({ prop = "foo" }: StringUnion) {}
+
+interface StringIdentity {
+    stringIdentity(s: string): string;
+}
+let { stringIdentity: id = arg => arg }: StringIdentity = { stringIdentity: x => x};

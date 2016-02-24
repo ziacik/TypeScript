@@ -19,6 +19,11 @@ interface StringUnion {
 }
 function h({ prop = "foo" }: StringUnion) {}
 
+interface StringIdentity {
+    stringIdentity(s: string): string;
+}
+let { stringIdentity: id = arg => arg }: StringIdentity = { stringIdentity: x => x};
+
 
 //// [contextuallyTypedBindingInitializer.js]
 function f(_a) {
@@ -33,3 +38,4 @@ function g(_a) {
 function h(_a) {
     var _b = _a.prop, prop = _b === void 0 ? "foo" : _b;
 }
+var _a = { stringIdentity: function (x) { return x; } }.stringIdentity, id = _a === void 0 ? function (arg) { return arg; } : _a;
