@@ -110,11 +110,11 @@ for (let {
 >skills : Symbol(MultiRobot.skills, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 9, 17))
 
         primary: primaryA = "primary",
->primary : Symbol(primary, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 10, 13))
+>primary : Symbol(primary)
 >primaryA : Symbol(primaryA, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 35, 13))
 
         secondary: secondaryA = "secondary"
->secondary : Symbol(secondary, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 11, 25))
+>secondary : Symbol(secondary)
 >secondaryA : Symbol(secondaryA, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 36, 38))
 
     } = { primary: "none", secondary: "none" }
@@ -138,11 +138,11 @@ for (let {
 >skills : Symbol(MultiRobot.skills, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 9, 17))
 
         primary: primaryA = "primary",
->primary : Symbol(primary, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 10, 13))
+>primary : Symbol(primary)
 >primaryA : Symbol(primaryA, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 43, 13))
 
         secondary: secondaryA = "secondary"
->secondary : Symbol(secondary, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 11, 25))
+>secondary : Symbol(secondary)
 >secondaryA : Symbol(secondaryA, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 44, 38))
 
     } = { primary: "none", secondary: "none" }
@@ -166,11 +166,11 @@ for (let {
 >skills : Symbol(MultiRobot.skills, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 9, 17))
 
         primary: primaryA = "primary",
->primary : Symbol(primary, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 10, 13))
+>primary : Symbol(primary)
 >primaryA : Symbol(primaryA, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 51, 13))
 
         secondary: secondaryA = "secondary"
->secondary : Symbol(secondary, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 11, 25))
+>secondary : Symbol(secondary)
 >secondaryA : Symbol(secondaryA, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 52, 38))
 
     } = { primary: "none", secondary: "none" }
@@ -255,11 +255,11 @@ for (let {
 >skills : Symbol(MultiRobot.skills, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 9, 17))
 
         primary: primaryA = "primary",
->primary : Symbol(primary, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 10, 13))
+>primary : Symbol(primary)
 >primaryA : Symbol(primaryA, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 71, 13))
 
         secondary: secondaryA = "secondary"
->secondary : Symbol(secondary, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 11, 25))
+>secondary : Symbol(secondary)
 >secondaryA : Symbol(secondaryA, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 72, 38))
 
     } = { primary: "none", secondary: "none" }
@@ -287,11 +287,11 @@ for (let {
 >skills : Symbol(MultiRobot.skills, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 9, 17))
 
         primary: primaryA = "primary",
->primary : Symbol(primary, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 10, 13))
+>primary : Symbol(primary)
 >primaryA : Symbol(primaryA, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 80, 13))
 
         secondary: secondaryA = "secondary"
->secondary : Symbol(secondary, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 11, 25))
+>secondary : Symbol(secondary)
 >secondaryA : Symbol(secondaryA, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 81, 38))
 
     } = { primary: "none", secondary: "none" }
@@ -319,11 +319,11 @@ for (let {
 >skills : Symbol(MultiRobot.skills, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 9, 17))
 
         primary: primaryA = "primary",
->primary : Symbol(primary, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 10, 13))
+>primary : Symbol(primary)
 >primaryA : Symbol(primaryA, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 89, 13))
 
         secondary: secondaryA = "secondary"
->secondary : Symbol(secondary, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 11, 25))
+>secondary : Symbol(secondary)
 >secondaryA : Symbol(secondaryA, Decl(sourceMapValidationDestructuringForObjectBindingPatternDefaultValues.ts, 90, 38))
 
     } = { primary: "none", secondary: "none" }

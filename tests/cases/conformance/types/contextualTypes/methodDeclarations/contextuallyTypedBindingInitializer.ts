@@ -1,22 +1,20 @@
 // @noImplicitAny: true
-interface Parser {
-    parse: (x: string) => number;
+interface Show {
+    show: (x: number) => string;
 }
+function f({ show = v => v.toString() }: Show) {}
 
-function f({ parse = v => v }: Parser) {
-
+interface Nested {
+    nested: Show
 }
+function ff({ nested = { show: v => v.toString() } }: Nested) {}
 
-interface Foo {
+interface Tuples {
     prop: [string, number];
 }
-function g({ prop = ["hello", 1234] }: Foo) {
+function g({ prop = ["hello", 1234] }: Tuples) {}
 
-}
-
-interface Bar {
+interface StringUnion {
     prop: "foo" | "bar";
 }
-function h({ prop = "foo" }: Bar) {
-    
-}
+function h({ prop = "foo" }: StringUnion) {}
