@@ -952,7 +952,10 @@ namespace ts {
     export function createProgram(rootNames: string[], options: CompilerOptions, host?: CompilerHost, oldProgram?: Program): Program {
         let program: Program;
         let files: SourceFile[] = [];
+
         let commonSourceDirectory: string;
+        let getSubpathInProjectWorker: (fileName: string) => string;
+
         let diagnosticsProducingTypeChecker: TypeChecker;
         let noDiagnosticsTypeChecker: TypeChecker;
         let classifiableNames: Map<string>;
@@ -1056,16 +1059,15 @@ namespace ts {
 
         programTime += new Date().getTime() - start;
 
-        let getSubpathInProjectWorker: (fileName: string) => string;
         return program;
 
         function getSubpathInProject(fileName: string): string {
             Debug.assert(isRootedDiskPath(fileName));
-            return (getSubpathInProjectWorker || (getSubpathInProjectWorker = initializeGetSubpathInProjectWorker()))(fileName); 
+            return (getSubpathInProjectWorker || (getSubpathInProjectWorker = initializeGetSubpathInProjectWorker()))(fileName);
         }
 
         function getSourceMapBasePath(): string {
-            throw new Error("NYI");
+            return getCommonSourceDirectory();
         }
 
         function initializeGetSubpathInProjectWorker(): typeof getSubpathInProjectWorker {
@@ -1082,14 +1084,14 @@ namespace ts {
                         }
                     }
                     return longestMatchPrefix != undefined ? fileName.substr(longestMatchPrefix.length) : fileName;
-                }
+                };
             }
             else {
-                const rootDir = toRootDirectory(options.rootDir != undefined ? options.rootDir : computeCommonSourceDirectory(files));
+                const rootDir = toRootDirectory(options.rootDir != undefined ? options.rootDir : getCommonSourceDirectory());
                 return fileName => {
                     const path = toPath(fileName, currentDirectory, getCanonicalFileName);
                     return startsWith(path, rootDir) ? fileName.substr(rootDir.length) : fileName;
-                }
+                };
             }
         }
 
