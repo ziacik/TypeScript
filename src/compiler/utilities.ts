@@ -84,6 +84,30 @@ namespace ts {
         return node.end - node.pos;
     }
 
+    export function mapIsEqualTo<T>(map1: Map<T>, map2: Map<T>): boolean {
+        if (map1 === map2) {
+            return true;
+        }
+        if (!map1 || !map2) {
+            return map1 === map2;
+        }
+        return isSubsetOf(map1, map2) && isSubsetOf(map2, map1);
+    }
+    
+    function isSubsetOf<T>(map: Map<T>, other: Map<T>): boolean {
+        for (const key in map) {
+            if (hasProperty(map, key)) {
+                if (!hasProperty(other, key)) {
+                    return false;
+                }
+                if (map[key] !== other[key]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
     export function arrayIsEqualTo<T>(array1: T[], array2: T[], equaler?: (a: T, b: T) => boolean): boolean {
         if (!array1 || !array2) {
             return array1 === array2;

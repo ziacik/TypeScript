@@ -1105,7 +1105,10 @@ namespace ts {
                 (oldOptions.jsx !== options.jsx) ||
                 (oldOptions.allowJs !== options.allowJs) ||
                 (oldOptions.rootDir !== options.rootDir) ||
-                (oldOptions.typesSearchPaths !== options.typesSearchPaths) ||
+                (!arrayIsEqualTo(oldOptions.typesSearchPaths, options.typesSearchPaths)) ||
+                (!arrayIsEqualTo(oldOptions.rootDirs, options.rootDirs)) ||
+                (oldOptions.baseUrl !== options.baseUrl) ||
+                (!mapIsEqualTo(oldOptions.paths, options.paths)) ||
                 (oldOptions.configFilePath !== options.configFilePath)) {
                 return false;
             }
