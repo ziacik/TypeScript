@@ -317,6 +317,11 @@ namespace ts {
             }
         },
         {
+            name: "useRootDirsForEmit",
+            type: "boolean",
+            isTSConfigOnly: true
+        },
+        {
             name: "typesSearchPaths",
             type: "list",
             isTSConfigOnly: true,
