@@ -1056,14 +1056,46 @@ namespace ts {
 
         programTime += new Date().getTime() - start;
 
+        let getSubpathInProjectWorker: (fileName: string) => string;
         return program;
 
         function getSubpathInProject(fileName: string): string {
-            throw new Error("NYI");
+            Debug.assert(isRootedDiskPath(fileName));
+            return (getSubpathInProjectWorker || (getSubpathInProjectWorker = initializeGetSubpathInProjectWorker()))(fileName); 
         }
 
         function getSourceMapBasePath(): string {
             throw new Error("NYI");
+        }
+
+        function initializeGetSubpathInProjectWorker(): typeof getSubpathInProjectWorker {
+            if (options.rootDirs && options.useRootDirsForEmit) {
+                const normalizedRootDirs = map(options.rootDirs, toRootDirectory);
+                return fileName => {
+                    const path = toPath(fileName, currentDirectory, getCanonicalFileName);
+                    let longestMatchPrefix: string;
+                    for (const rootDir of normalizedRootDirs) {
+                        if (startsWith(path, rootDir)) {
+                            if (longestMatchPrefix === undefined || longestMatchPrefix.length < path.length) {
+                                longestMatchPrefix = path;
+                            }
+                        }
+                    }
+                    return longestMatchPrefix != undefined ? fileName.substr(longestMatchPrefix.length) : "";
+                }
+            }
+            else {
+                const rootDir = toRootDirectory(options.rootDir != undefined ? options.rootDir : computeCommonSourceDirectory(files));
+                return fileName => {
+                    const path = toPath(fileName, currentDirectory, getCanonicalFileName);
+                    return startsWith(path, rootDir) ? fileName.substr(rootDir.length) : "";
+                }
+            }
+        }
+
+        function toRootDirectory(rootDir: string) {
+            const path = toPath(rootDir, currentDirectory, getCanonicalFileName);
+            return endsWith(path, directorySeparator) ? path : path + directorySeparator;
         }
 
         function getCommonSourceDirectory() {
@@ -2082,6 +2114,14 @@ namespace ts {
             // Cannot specify module gen that isn't amd or system with --out
             if (outFile && options.module && !(options.module === ModuleKind.AMD || options.module === ModuleKind.System)) {
                 programDiagnostics.add(createCompilerDiagnostic(Diagnostics.Only_amd_and_system_modules_are_supported_alongside_0, options.out ? "out" : "outFile"));
+            }
+
+            if (options.useRootDirsForEmit && !options.rootDirs) {
+                programDiagnostics.add(createCompilerDiagnostic(Diagnostics.Option_0_cannot_be_specified_without_specifying_option_1, "useRootDirsForEmit", "rootDirs"));
+            }
+
+            if (options.rootDirs && options.rootDir) {
+                programDiagnostics.add(createCompilerDiagnostic(Diagnostics.Option_0_cannot_be_specified_with_option_1, "rootDirs", "rootDir"));
             }
 
             // there has to be common source directory if user specified --outdir || --sourceRoot
