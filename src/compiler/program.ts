@@ -1081,14 +1081,14 @@ namespace ts {
                             }
                         }
                     }
-                    return longestMatchPrefix != undefined ? fileName.substr(longestMatchPrefix.length) : "";
+                    return longestMatchPrefix != undefined ? fileName.substr(longestMatchPrefix.length) : fileName;
                 }
             }
             else {
                 const rootDir = toRootDirectory(options.rootDir != undefined ? options.rootDir : computeCommonSourceDirectory(files));
                 return fileName => {
                     const path = toPath(fileName, currentDirectory, getCanonicalFileName);
-                    return startsWith(path, rootDir) ? fileName.substr(rootDir.length) : "";
+                    return startsWith(path, rootDir) ? fileName.substr(rootDir.length) : fileName;
                 }
             }
         }
