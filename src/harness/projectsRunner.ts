@@ -362,7 +362,7 @@ class ProjectRunner extends RunnerBase {
                     let emitOutputFilePathWithoutExtension: string = undefined;
                     if (compilerOptions.outDir) {
                         let sourceFilePath = ts.getNormalizedAbsolutePath(sourceFile.fileName, compilerResult.program.getCurrentDirectory());
-                        sourceFilePath = sourceFilePath.replace(compilerResult.program.getCommonSourceDirectory(), "");
+                        sourceFilePath = compilerResult.program.getSubpathInProject(sourceFilePath);
                         emitOutputFilePathWithoutExtension = ts.removeFileExtension(ts.combinePaths(compilerOptions.outDir, sourceFilePath));
                     }
                     else {

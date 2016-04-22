@@ -1100,7 +1100,7 @@ namespace Harness {
                 if (!outFile) {
                     if (options.outDir) {
                         let sourceFilePath = ts.getNormalizedAbsolutePath(sourceFile.fileName, result.currentDirectoryForProgram);
-                        sourceFilePath = sourceFilePath.replace(result.program.getCommonSourceDirectory(), "");
+                        sourceFilePath =result.program.getSubpathInProject(sourceFilePath);
                         sourceFileName = ts.combinePaths(options.outDir, sourceFilePath);
                     }
                     else {
