@@ -1040,7 +1040,8 @@ namespace ts {
             getTypeChecker,
             getClassifiableNames,
             getDiagnosticsProducingTypeChecker,
-            getCommonSourceDirectory,
+            getSubpathInProject,
+            getSourceMapBasePath,
             emit,
             getCurrentDirectory: () => currentDirectory,
             getNodeCount: () => getDiagnosticsProducingTypeChecker().getNodeCount(),
@@ -1056,6 +1057,14 @@ namespace ts {
         programTime += new Date().getTime() - start;
 
         return program;
+
+        function getSubpathInProject(fileName: string): string {
+            throw new Error("NYI");
+        }
+
+        function getSourceMapBasePath(): string {
+            throw new Error("NYI");
+        }
 
         function getCommonSourceDirectory() {
             if (typeof commonSourceDirectory === "undefined") {
@@ -1221,7 +1230,8 @@ namespace ts {
         function getEmitHost(writeFileCallback?: WriteFileCallback): EmitHost {
             return {
                 getCanonicalFileName,
-                getCommonSourceDirectory: program.getCommonSourceDirectory,
+                getSubpathInProject: program.getSubpathInProject,
+                getSourceMapBasePath: program.getSourceMapBasePath,
                 getCompilerOptions: program.getCompilerOptions,
                 getCurrentDirectory: () => currentDirectory,
                 getNewLine: () => host.getNewLine(),

@@ -35,7 +35,8 @@ namespace ts {
     export interface EmitHost extends ScriptReferenceHost {
         getSourceFiles(): SourceFile[];
 
-        getCommonSourceDirectory(): string;
+        getSourceMapBasePath(): string;
+        getSubpathInProject(fileName: string): string;
         getCanonicalFileName(fileName: string): string;
         getNewLine(): string;
 
@@ -93,7 +94,7 @@ namespace ts {
         }
         return isSubsetOf(map1, map2) && isSubsetOf(map2, map1);
     }
-    
+
     function isSubsetOf<T>(map: Map<T>, other: Map<T>): boolean {
         for (const key in map) {
             if (hasProperty(map, key)) {
@@ -107,7 +108,7 @@ namespace ts {
         }
         return true;
     }
-    
+
     export function arrayIsEqualTo<T>(array1: T[], array2: T[], equaler?: (a: T, b: T) => boolean): boolean {
         if (!array1 || !array2) {
             return array1 === array2;
@@ -2118,10 +2119,8 @@ namespace ts {
      * Resolves a local path to a path which is absolute to the base of the emit
      */
     export function getExternalModuleNameFromPath(host: EmitHost, fileName: string): string {
-        const getCanonicalFileName = (f: string) => host.getCanonicalFileName(f);
-        const dir = toPath(host.getCommonSourceDirectory(), host.getCurrentDirectory(), getCanonicalFileName);
         const filePath = getNormalizedAbsolutePath(fileName, host.getCurrentDirectory());
-        const relativePath = getRelativePathToDirectoryOrUrl(dir, filePath, dir, getCanonicalFileName, /*isAbsolutePathAnUrl*/ false);
+        const relativePath = host.getSubpathInProject(filePath);
         return removeFileExtension(relativePath);
     }
 
@@ -2232,7 +2231,7 @@ namespace ts {
 
     export function getSourceFilePathInNewDir(sourceFile: SourceFile, host: EmitHost, newDirPath: string) {
         let sourceFilePath = getNormalizedAbsolutePath(sourceFile.fileName, host.getCurrentDirectory());
-        sourceFilePath = sourceFilePath.replace(host.getCommonSourceDirectory(), "");
+        sourceFilePath = host.getSubpathInProject(sourceFilePath);
         return combinePaths(newDirPath, sourceFilePath);
     }
 

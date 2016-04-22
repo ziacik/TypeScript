@@ -122,7 +122,7 @@ namespace ts {
 
                 if (!isRootedDiskPath(sourceMapDir) && !isUrl(sourceMapDir)) {
                     // The relative paths are relative to the common directory
-                    sourceMapDir = combinePaths(host.getCommonSourceDirectory(), sourceMapDir);
+                    sourceMapDir = combinePaths(host.getSourceMapBasePath(), sourceMapDir);
                     sourceMapData.jsSourceMappingURL = getRelativePathToDirectoryOrUrl(
                         getDirectoryPath(normalizePath(filePath)), // get the relative sourceMapDir path based on jsFilePath
                         combinePaths(sourceMapDir, sourceMapData.jsSourceMappingURL), // this is where user expects to see sourceMap
@@ -306,7 +306,7 @@ namespace ts {
             // Add the file to tsFilePaths
             // If sourceroot option: Use the relative path corresponding to the common directory path
             // otherwise source locations relative to map file location
-            const sourcesDirectoryPath = compilerOptions.sourceRoot ? host.getCommonSourceDirectory() : sourceMapDir;
+            const sourcesDirectoryPath = compilerOptions.sourceRoot ? host.getSourceMapBasePath() : sourceMapDir;
 
             const source = getRelativePathToDirectoryOrUrl(sourcesDirectoryPath,
                 currentSourceFile.fileName,
